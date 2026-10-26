@@ -1,0 +1,97 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --color-canvas: #f5f6fa;
+  --color-panel: #e9edf6;
+  --color-page: #eef1f8;
+  --color-navy: #161c37;
+  --color-navy-2: #222842;
+  --color-navy-3: #2e3556;
+  --color-brand: #3f5297;
+  --color-brand-dark: #2f3f78;
+  --color-brand-soft: #dfe5f6;
+  --color-peri: #b1bde6;
+  --color-salmon: #d49a8c;
+  --color-ink: #14172b;
+  --color-muted: #535a74;
+  --color-line: #d6dcea;
+}
+
+html { -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--color-canvas);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Dotted texture used on navy cards, as on the reference calculator. */
+.dots {
+  background-image: radial-gradient(rgb(255 255 255 / 4%) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Range slider: periwinkle fill, white thumb with a soft ring. */
+.slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 28px;
+  background: transparent;
+  cursor: pointer;
+  --pct: 50%;
+}
+.slider::-webkit-slider-runnable-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--color-peri) var(--pct), var(--color-navy-3) var(--pct));
+}
+.slider::-moz-range-track {
+  height: 6px;
+  border-radius: 999px;
+  background: linear-gradient(to right, var(--color-peri) var(--pct), var(--color-navy-3) var(--pct));
+}
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 24px;
+  height: 24px;
+  margin-top: -9px;
+  border-radius: 50%;
+  background: #fff;
+  border: 4px solid #4b5476;
+  box-shadow: 0 2px 6px rgb(0 0 0 / 30%);
+}
+.slider::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #fff;
+  border: 4px solid #4b5476;
+}
+.slider:focus-visible { outline: 2px solid var(--color-peri); outline-offset: 4px; border-radius: 8px; }
+
+/* Hide the scrollbar on the horizontal step tabs while keeping them scrollable. */
+.no-scrollbar { scrollbar-width: none; }
+.no-scrollbar::-webkit-scrollbar { display: none; }
+
+/* Homepage intro animation (CSS only). */
+@keyframes rise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+@keyframes slide { from { transform: translateY(18px); } to { transform: none; } }
+.reveal { animation: rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+.reveal-slide { animation: slide 0.6s cubic-bezier(0.22, 1, 0.36, 1) both; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-slide { animation: none; }
+  html { scroll-behavior: auto; }
+}
+
+@media print {
+  header, footer, .no-print { display: none !important; }
+  body { background: #fff; }
+  .print-plain { background: #fff !important; color: #000 !important; box-shadow: none !important; }
+  .print-plain * { color: #000 !important; }
+  .break-avoid { break-inside: avoid; }
+}
+
+h1, h2, h3 { text-wrap: balance; }
+p { text-wrap: pretty; }
